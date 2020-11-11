@@ -31,12 +31,26 @@ function createTimeBlock(hourStr, taskStr) {
     $timeBlock.append($(`<div class="col bg-info d-flex flex-column justify-content-center">
         <input class="bg-transparent border-0 text-white" type="text" ${taskStr?'value="'+taskStr+'"':'placeholder="Add a task here..."'}>
     </div>`));
-    $timeBlock.append($(`<div class="col-1 bg-warning text-center d-flex flex-column justify-content-center rounded-right text-white">
+    $timeBlock.append($(`<div class="col-1 bg-warning text-center d-flex flex-column justify-content-center rounded-right text-white saveBtn">
         <h2><i class="fa fa-save"></i> </h2>
     </div>`));
 
     return $timeBlock;
 }
 
-$('.container').append(createTimeBlock('11;00am'));
-$('.container').append(createTimeBlock('12;00am', 'asdasdasd'));
+//existing elements:
+let $container = $('.container');
+let $currentDay = $('#currentDay');
+
+//set current date
+$currentDay.text(moment(Date.now()).format('LL'));
+
+//loop though the hours
+for(let i=0; i<24; i++) {
+    //define time string
+    let timeStr = (i>9?i:'0'+i)+":00";
+
+    //create time block
+    let $timeBlock = createTimeBlock(timeStr, localStorage.getItem(timeStr));
+    $container.append($timeBlock);
+}
