@@ -75,3 +75,11 @@ textarea{
 .saveBtn i:active {
   color: black;
 }
+
+.bg-now {
+  background: lightcoral;
+}
+
+.bg-future {
+  background: lightgreen;
+}

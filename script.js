@@ -28,7 +28,20 @@ function createTimeBlock(hourStr, taskStr) {
     $timeBlock.append($(`<div class="col-2 bg-primary rounded-left text-white text-center d-flex flex-column justify-content-center">
         ${hourStr}
     </div>`));
-    $timeBlock.append($(`<div class="col bg-info d-flex flex-column justify-content-center">
+
+    //change background color depends on current time.
+    let bg = 'bg-future';
+    let hour = parseInt(hourStr.split(":")[0]);
+    let nowHour = moment().hour();
+
+    if(hour === nowHour) {
+        bg = "bg-now";
+    } else if(hour < nowHour) {
+        bg = 'bg-dark'
+    }
+
+
+    $timeBlock.append($(`<div class="col ${bg} d-flex flex-column justify-content-center">
         <input class="bg-transparent border-0 text-white" type="text" ${taskStr?'value="'+taskStr+'"':'placeholder="Add a task here..."'}>
     </div>`));
     $timeBlock.append($(`<div class="col-1 bg-warning text-center d-flex flex-column justify-content-center rounded-right text-white saveBtn">
