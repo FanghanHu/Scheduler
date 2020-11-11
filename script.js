@@ -54,3 +54,18 @@ for(let i=0; i<24; i++) {
     let $timeBlock = createTimeBlock(timeStr, localStorage.getItem(timeStr));
     $container.append($timeBlock);
 }
+
+//when save button is clicked
+$('.saveBtn').click(function() {
+    //get the values associated with the save button
+    let hourStr = $(this).siblings()[0].textContent.trim();
+    let taskStr = $(this).siblings()[1].children[0].value;
+
+    //save entered values
+    if(taskStr) {
+        localStorage.setItem(hourStr, taskStr);
+    } else {
+        //clear save if nothing is entered.
+        localStorage.removeItem(hourStr);
+    }
+});
